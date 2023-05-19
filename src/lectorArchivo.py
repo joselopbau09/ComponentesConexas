@@ -2,28 +2,30 @@
 from sys import argv
 from Graph import Graph
 
-def lecturaArchivo(nombre):
-    listaLineas = []
-    with open(nombre) as archivo:
-        listaLineas = archivo.readlines()
-    grafica = creacionGrafica(listaLineas.pop(0))
-    return unirVertices(listaLineas, grafica)
+class LectorArchivo:  
 
-def creacionGrafica(cadena):
-    grafica = Graph()
-    listaVertices  = cadena.split(',')
-    eliminarSalto = listaVertices[len(listaVertices) - 1].replace('\n','')
-    listaVertices[len(listaVertices) - 1] = eliminarSalto
-    for vertice in listaVertices:
-        grafica.addVertex(vertice)
-            
-    return grafica
+    def __init__(self,nombreArchivo) -> None:
+        self.nombreArchivo = nombreArchivo
+        self.grafica = Graph()
 
-def unirVertices(listaCadenas, grafica):
-    graph = grafica
-    for cadena in listaCadenas:
-        listaAristas  = cadena.split(',')
-        eliminarSalto = listaAristas[1].replace('\n','')
-        listaAristas[1] = eliminarSalto
-        graph.addEdge(listaAristas[0], listaAristas[1])
-    return graph    
+    def lecturaArchivo(self) -> Graph:
+        listaLineas = []
+        with open(self.nombreArchivo) as archivo:
+            listaLineas = archivo.readlines()
+        self.grafica = self.creacionGrafica(listaLineas.pop(0))
+        return self.unirVertices(listaLineas)
+
+    def creacionGrafica(self,cadena):
+        listaVertices  = cadena.split(',')
+        eliminarSalto = listaVertices[len(listaVertices) - 1].replace('\n','')
+        listaVertices[len(listaVertices) - 1] = eliminarSalto
+        for vertice in listaVertices:
+            self.grafica.addVertex(vertice)
+                
+    def unirVertices(self, listaCadenas):
+        for cadena in listaCadenas:
+            listaAristas  = cadena.split(',')
+            eliminarSalto = listaAristas[1].replace('\n','')
+            listaAristas[1] = eliminarSalto
+            self.grafica.addEdge(listaAristas[0], listaAristas[1])
+  

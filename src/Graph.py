@@ -5,26 +5,21 @@ class Vertice:
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
-        self.distance = sys.maxsize
 
-        self.independiente = False
         self.visted = False
         self.previous = None
 
     def addNeighbor(self, neighbor, weight = 0):    
         self.adjacent[neighbor] = weight
 
-    def getConnection(self):
-        return self.adjacent.keys()
+    def getConnection(self): 
+        lista = []
+        for vertice in list(self.adjacent.keys()):
+            lista.append(self.adjacent[vertice])
+        return lista
 
     def getverticeId(self):
-        return self.id
-
-    def setDistance(self,dist):
-        self.distance = dist
-
-    def getDistance(self):
-        return self.distance 
+        return self.id 
 
     def setPrevious(self, prev):
         self.previous = prev
@@ -34,9 +29,6 @@ class Vertice:
 
     def getAdjacent(self):
         return self.adjacent
-
-    def addConjuntoIdependiente(self):
-        self.independiente = True
 
     def __str__(self):
         return f'{str(self.id)} adjacent: {str([x.id for x in self.adjacent])}'                    
@@ -69,8 +61,11 @@ class Graph:
         self.vertDictionery[frm].addNeighbor(self.vertDictionery[to], cost)
 
     def getVertices(self):
-        return list(self.vertDictionery.keys())
-
+        lista = []
+        for vertice in list(self.vertDictionery.keys()):
+            lista.append(self.vertDictionery[vertice])
+        return lista
+        
     def getNumVertices(self):
         return self.numVertices
 
