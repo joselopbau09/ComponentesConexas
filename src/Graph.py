@@ -3,84 +3,71 @@ import sys
 
 class Vertice:
     def __init__(self, node):
-        self.id = node
-        self.adjacent = {}
+        self.valor = node
+        self.adyacente = {}
 
-        self.visted = False
-        self.previous = None
+        self.visitado = False
+        self.anterior = None
 
-    def addNeighbor(self, neighbor, weight = 0):    
-        self.adjacent[neighbor] = weight
+    def agregarVecino(self, vecino, weight = 0):    
+        self.adyacente[vecino] = weight
 
-    def getConnection(self): 
-        lista = []
-        for vertice in list(self.adjacent.keys()):
-            lista.append(self.adjacent[vertice])
-        return lista
+    def getVecinos(self):          
+        return list(self.adyacente.keys())
 
-    def getverticeId(self):
-        return self.id 
+    def getVerticeValor(self):
+        return self.valor 
 
-    def setPrevious(self, prev):
-        self.previous = prev
+    def setAnterior(self, prev):
+        self.anterior = prev
+ 
+    def setVisitado(self):
+        self.visitado = True
 
-    def setVisited(self):
-        self.visted = True
-
-    def getAdjacent(self):
-        return self.adjacent
+    def getAdyacentes(self):
+        return list(self.adyacente.keys())
 
     def __str__(self):
-        return f'{str(self.id)} adjacent: {str([x.id for x in self.adjacent])}'                    
+        return f'{str(self.valor)} adyacente: {str([x.valor for x in self.adyacente])}'                    
 
 class Graph:
     def __init__(self):
-        self.vertDictionery = {}
-        self.numVertices = 0
+        self.diccionarioVertices = {}
 
     def __iter__(self):
-        return iter(self.vertDictionery.values())
+        return iter(self.diccionarioVertices.values())
 
-    def addVertex(self ,node):
-        self.numVertices += 1
-        newVertex = Vertice(node)
-        self.vertDictionery[node] = newVertex
-        return newVertex
+    def agregarVertice(self ,node):
+        newVertice = Vertice(node)
+        self.diccionarioVertices[node] = newVertice
+        return newVertice
 
-    def getVertex(self, n):     
-        if n  in self.vertDictionery:
-            return self.vertDictionery[n]
+    def getVertice(self, n):     
+        if n  in self.diccionarioVertices:
+            return self.diccionarioVertices[n]
         else:
             return None
 
-    def addEdge(self, frm, to, cost = 0):
-        if frm not in self.vertDictionery:
-            self.addVertex(frm)
-        if to not in self.vertDictionery:
-            self.addVertex(to)
-        self.vertDictionery[frm].addNeighbor(self.vertDictionery[to], cost)
+    def agregarArista(self, frm, to, cost = 0):
+        if frm not in self.diccionarioVertices:
+            self.agregarVertice(frm)
+        if to not in self.diccionarioVertices:
+            self.agregarVertice(to)
+        self.diccionarioVertices[frm].agregarVecino(self.diccionarioVertices[to], cost)
+        self.diccionarioVertices[to].agregarVecino(self.diccionarioVertices[frm], cost)
 
     def getVertices(self):
         lista = []
-        for vertice in list(self.vertDictionery.keys()):
-            lista.append(self.vertDictionery[vertice])
+        for vertice in list(self.diccionarioVertices.keys()):
+            lista.append(self.diccionarioVertices[vertice])
         return lista
-        
-    def getNumVertices(self):
-        return self.numVertices
 
-    def setPrevious(self,current):                                
-        self.previous = current
-
-    def getPrevious(self):                                
-        return self.previous 
-
-    def getEdges(self,graph):
-        edges = []
+    def getArista(self,graph):
+        aristas = []
         G = graph
         for v in G:
-            for w in v.getConnection():
-                vid = v.getverticeId()    
-                wid = w.getverticeId()
-                edges.append((vid, wid))
-        return edges
+            for w in v.getVecinos():
+                vValor = v.getVerticeValor()    
+                wValor = w.getVerticeValor()
+                aristas.append((vValor, wValor))
+        return aristas

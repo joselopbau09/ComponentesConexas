@@ -7,6 +7,7 @@ class LectorArchivo:
     def __init__(self,nombreArchivo) -> None:
         self.nombreArchivo = nombreArchivo
         self.grafica = Graph()
+        self.lecturaArchivo
 
     def lecturaArchivo(self) -> Graph:
         listaLineas = []
@@ -28,4 +29,7 @@ class LectorArchivo:
             eliminarSalto = listaAristas[1].replace('\n','')
             listaAristas[1] = eliminarSalto
             self.grafica.addEdge(listaAristas[0], listaAristas[1])
-  
+    
+    def getGrafica(self):
+        
+        return self.grafica
