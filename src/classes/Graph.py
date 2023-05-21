@@ -1,6 +1,4 @@
 
-import sys
-
 class Vertice:
     def __init__(self, node):
         self.valor = node
@@ -61,13 +59,3 @@ class Graph:
         for vertice in list(self.diccionarioVertices.keys()):
             lista.append(self.diccionarioVertices[vertice])
         return lista
-
-    def getArista(self,graph):
-        aristas = []
-        G = graph
-        for v in G:
-            for w in v.getVecinos():
-                vValor = v.getVerticeValor()    
-                wValor = w.getVerticeValor()
-                aristas.append((vValor, wValor))
-        return aristas

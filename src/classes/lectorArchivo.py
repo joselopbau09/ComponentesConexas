@@ -1,6 +1,6 @@
 
 from sys import argv
-from Graph import Graph
+from classes.Graph import *
 
 class LectorArchivo:  
 

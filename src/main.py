@@ -1,6 +1,7 @@
+
 from sys import argv
-from Buscador import Buscador
-from Graph import Graph
+from classes.Buscador import Buscador
+from classes.Graph import Graph
 
 def lecturaArchivo(nombre):
     listaLineas = []

@@ -19,5 +19,5 @@ python3 main.py
 -Ejemplo:
 
 ```
-Python3 main.py graph1.txt
+python3 main.py graph1.txt
 ```

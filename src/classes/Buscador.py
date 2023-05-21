@@ -1,6 +1,6 @@
 
 import random 
-from Graph import *
+from classes.Graph import *
 
 
 class Buscador:
