@@ -41,7 +41,8 @@ def unirVertices(listaCadenas:list[str], grafica:Graph) -> Graph:
 
     Args:
         listaCadenas (list[str]): Lista que almacena las aristas de la grafica.
-
+        
+        grafica (Graph): Grafica de la que se uniran los vertices.
     Returns:
         Graph: Grafica creada. 
     """
